@@ -3,15 +3,30 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0",
-    "react-scripts": "3.2.0"
+    "autoprefixer": "^9.7.0",
+    "axios": "^0.19.0",
+    "bootstrap": "^4.3.1",
+    "css-loader": "^3.2.0",
+    "mdbreact": "^4.22.0",
+    "node-sass": "^4.13.0",
+    "postcss-loader": "^3.0.0",
+    "precss": "^4.0.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.4.1",
+    "react-bootstrap": "^1.0.0-beta.14",
+    "react-dom": "^16.4.1",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^5.1.2",
+    "redux": "^4.0.0",
+    "sass-loader": "^8.0.0",
+    "scss-loader": "0.0.1",
+    "single-spa-react": "^2.6.0",
+    "style-loader": "^1.0.0",
+    "sweetalert2": "^8.18.6"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "watch:portal": "webpack-dev-server --port 9002",
+    "build:portal": "webpack -p --progress"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -27,5 +42,24 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-export-default-from": "^7.5.2",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/polyfill": "^7.6.0",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/preset-react": "^7.6.3",
+    "@babel/runtime": "^7.6.3",
+    "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.0.6",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "file-loader": "^1.1.11",
+    "webpack": "^4.12.1",
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.4"
   }
 }

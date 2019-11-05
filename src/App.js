@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Provider, connect } from 'react-redux';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        store: this.props.store,
+
+        globalEventDistributor: this.props.globalEventDistributor,  
+    }
+  }
+
+  componentDidCatch(error, info) {
+    console.log(error, info);
+  } 
+
+  
+  render() {
+    const {store,globalEventDistributor } = this.state
+    return (
+        <div className="container-fluid">
+            {store && globalEventDistributor ?
+                <Provider store={this.state.store}>
+                    <div className="row">
+                        <h1>Esto es una single spa</h1>
+                    </div>
+                </Provider> :
+                <div>EL store no ha sido iniciado </div>}
+        </div>
+    )
+  }
+
 }
 
 export default App;
