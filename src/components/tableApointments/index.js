@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { MDBDataTable } from 'mdbreact';
 import  './tableStyle.css';
 
-const TableApointments = (dataTable) => {
+const TableApointments = ({dataTable}) => {
     
     return (
         <div className="row" id="table" >

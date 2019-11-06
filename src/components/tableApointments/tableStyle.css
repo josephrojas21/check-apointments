@@ -1,0 +1,10 @@
+#table{
+
+    position: relative;
+    padding-top: 2.5%;
+    padding-bottom: 5%;
+    border: 0.5px rgb(185, 185, 185) solid;
+    border-radius: 10px 10px 10px 10px;
+    background: rgb(233, 233, 233);
+    margin-top:2%;
+}
