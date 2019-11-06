@@ -3,6 +3,8 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider, connect } from 'react-redux';
 
+import SearchApointments from './components/searchApointments/index'
+
 
 class App extends Component {
   constructor(props) {
@@ -26,7 +28,10 @@ class App extends Component {
             {store && globalEventDistributor ?
                 <Provider store={this.state.store}>
                     <div className="row">
-                        <h1>Esto es una single spa</h1>
+                      <div className="col-7" id="searchComp">
+                        <SearchApointments />
+                        {/* { isData ? <TableOrders dataTable={dataTable}/> : <h1>No hay ordenes para poder agendar cita</h1> } */}
+                      </div>
                     </div>
                 </Provider> :
                 <div>EL store no ha sido iniciado </div>}
