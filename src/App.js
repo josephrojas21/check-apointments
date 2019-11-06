@@ -17,6 +17,7 @@ class App extends Component {
         dataTable: {},
         globalEventDistributor: this.props.globalEventDistributor,
         isData: false,
+        selected: "Por favor seleccione ua cita para ver detalle"
     }
   }
 
@@ -25,6 +26,9 @@ class App extends Component {
   } 
 
   handleClick(order){
+    this.setState({
+      selected: order
+    })
     console.log('hola desdee aca',order);
   }
 
@@ -53,7 +57,7 @@ class App extends Component {
 
   
   render() {
-    const {store, globalEventDistributor, isData, dataTable } = this.state
+    const {store, globalEventDistributor, isData, dataTable, selected } = this.state
     return (
         <div className="container-fluid">
             {store && globalEventDistributor ?
@@ -64,7 +68,7 @@ class App extends Component {
                         { isData ? <TableApointments dataTable={dataTable}/> : <h1>No hay ordenes para poder agendar cita</h1> }
                       </div>
                       <div className="col-5" id="detail">
-                            <DetailsApointments/>                                                            
+                            <DetailsApointments selected={selected}/>                                                            
                          
                               
                         </div>

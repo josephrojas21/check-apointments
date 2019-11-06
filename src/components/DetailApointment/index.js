@@ -1,21 +1,31 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import DetailData from './DetailData'
 import './DetailStyle.css'
 
 export default class DetailsApointments extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            
         }
     }
 
     render() {
+        const {selected} = this.props
         return (
-            <div className="row" id="search">
-                <div className="col-6">
-                    <h5>Citas agendadas</h5>
+            <Fragment>
+                <div className="row" id="detailsTitle">
+                    <div className="col-12">
+                        <h4>Detalle citas PCFK1</h4>
+                    </div>
                 </div>
-            </div>
+                <div className="row" id="detailsBody">
+                    <div className="col-12">
+                        <DetailData/>
+                    </div>
+                </div>
+            </Fragment>
+            
         )
     }
 }

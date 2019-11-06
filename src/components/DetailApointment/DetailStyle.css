@@ -1,9 +1,17 @@
-#details {
-    border-style: hidden !important;
-    color: #0069b4 !important;
-    text-align: center !important;
-    font-weight: bold !important;
-    font-size: 14px !important;
-    padding-bottom: 2%;
+#detailsTitle{
+    color: blue;
+    position: relative;
     padding-top: 2%;
+    border: 0.5px rgb(185, 185, 185) solid;
+    border-radius: 10px 10px 10px 10px;
+    background: rgb(233, 233, 233);
+}
+
+#detailsBody{
+    margin-top: 4%;
+    position: relative;
+    padding-top: 2%;
+    border: 0.5px rgb(185, 185, 185) solid;
+    border-radius: 10px 10px 10px 10px;
+    background: rgb(233, 233, 233);
 }
