@@ -4,7 +4,7 @@ import Img from 'react-image'
 
 import  QRCode from 'qrcode.react';
 
-const DetailData = (props) => {
+const DetailData = ({dataDetails}) => {
     
     return (
         <div>
@@ -37,7 +37,7 @@ const DetailData = (props) => {
                             <li>Documnto compra: 874546654</li>
                             <li>Codigo material: 2452163</li>
                             <li>Ordern fabricacion: 641163</li>
-                            <li>MAterial: TRIO DE CAMISET</li>
+                            <li>Material: TRIO DE CAMISET</li>
                         </ul>
                     </div>
                 </div>
@@ -90,7 +90,7 @@ const DetailData = (props) => {
                     </div>
                 </div>
                 <div className="row ">
-                    <div className="col-12 align-content-center">
+                    <div className="col-12 counters">
                         <ul className="list-group list-group-horizontal">
                             <li className="list-group-item d-flex justify-content-between align-items-center">
                                 Tulas

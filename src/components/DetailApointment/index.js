@@ -11,7 +11,7 @@ export default class DetailsApointments extends Component {
     }
 
     render() {
-        const {selected} = this.props
+        const {dataDetails} = this.props
         return (
             <Fragment>
                 <div className="row" id="detailsTitle">
@@ -21,7 +21,7 @@ export default class DetailsApointments extends Component {
                 </div>
                 <div className="row" id="detailsBody">
                     <div className="col-12">
-                        <DetailData/>
+                        <DetailData data={dataDetails}/>
                     </div>
                 </div>
             </Fragment>
