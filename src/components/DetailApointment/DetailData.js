@@ -1,5 +1,5 @@
 import React from 'react'
-import {ButtonToolbar, Button, Table,Form} from 'react-bootstrap'
+import {ButtonToolbar, Button, Table,Form, FormControl, InputGroup} from 'react-bootstrap'
 import Img from 'react-image'
 
 import  QRCode from 'qrcode.react';
@@ -10,7 +10,7 @@ const DetailData = (props) => {
         <div>
             <ButtonToolbar>
                 <Button variant="danger">Editar</Button>
-                <Button variant="Primary">Cancelar</Button>
+                <Button variant="secondry">Cancelar</Button>
                 <Button variant="primary">Guardar</Button>
             </ButtonToolbar>
             <div className="row apoinment" >
@@ -83,10 +83,28 @@ const DetailData = (props) => {
                     <div className="col-12">
                         <Form>
                             <Form.Group >
-                                <Form.Label>Example textarea</Form.Label>
-                                <Form.Control size="lg" as="textarea" rows="3" />
+                                <Form.Label>Observciones</Form.Label>
+                                <Form.Control size="lg" as="textarea" rows="3" cols="60" />
                             </Form.Group>
                         </Form>
+                    </div>
+                </div>
+                <div className="row ">
+                    <div className="col-12 align-content-center">
+                        <ul className="list-group list-group-horizontal">
+                            <li className="list-group-item d-flex justify-content-between align-items-center">
+                                Tulas
+                                <span className="badge badge-primary badge-pill ml-2">14</span>
+                            </li>
+                            <li className="list-group-item d-flex justify-content-between align-items-center ml-5">
+                                Cajas
+                                <span className="badge badge-primary badge-pill ml-2">2</span>
+                            </li>
+                            <li className="list-group-item d-flex justify-content-between align-items-center ml-5">
+                                Bolsas
+                                <span className="badge badge-primary badge-pill ml-2">1</span>
+                            </li>
+                        </ul>    
                     </div>
                 </div>
             </div>
