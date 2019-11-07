@@ -13,7 +13,7 @@ class SearchApointments extends Component{
         return (
             <div className="row" id="search">
                 <div className="col-6">
-                    <h5>Citas agendadas</h5>
+                    <h4>Citas agendadas</h4>
                 </div>
                 <div className="col-6">
                     <div className="input-group mb-3">
