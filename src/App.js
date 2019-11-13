@@ -6,7 +6,11 @@ import TableApointments from './components/tableApointments/index'
 import SearchApointments from './components/searchApointments/index'
 import DataApointements from './services/data'
 import DetailsApointments from './components/DetailApointment/index'
-import {ButtonGroup, Button} from 'react-bootstrap'
+import {ButtonGroup, Button, ToggleButton} from 'react-bootstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheckSquare } from '@fortawesome/free-regular-svg-icons'
+
+
 
 
 class App extends Component {
@@ -14,50 +18,71 @@ class App extends Component {
     super(props);
     this.state = {
         store: this.props.store,
-        dataTable: {},
+        dataTable: [],
         globalEventDistributor: this.props.globalEventDistributor,
         isData: false,
-        selected: null,
-        dataDetails: false
+        selected: false,
+        dataDetails: {},
+        detailsTable: []
     }
+
+    this.handleClick = this.handleClick.bind(this)
   }
 
   componentDidCatch(error, info) {
     console.log(error, info);
   } 
 
-  handleClick(order){
-    this.setState({
-      dataDetails: dataTable.rows[order]
-    })
-    console.log('hola desdee aca',order);
+
+  handleClick = e =>{
+    e.persist();
+    const { value, id } = e.target;
+   
+    console.log(value,id );
+    if(value){
+
+    }else{
+      console.log('entro a esta');
+      
+      DataApointements.getDetails(id).then(res =>{
+        this.setState({
+          selected: true,
+          detailsTable: res.table,
+          dataDetails: res
+        })
+      })
+    }
+    
   }
+
+  
 
   componentDidMount() {
     DataApointements.getData().then(data =>{
-        for (const key in data.rows) {
-            if (data.rows.hasOwnProperty(key)) {
-                let element = data.rows[key];
-                let fun = {Opciones: <ButtonGroup aria-label="Basic example">
-                  <Button variant="secondary">imp</Button>
-                  <Button variant="danger">del</Button>
-                </ButtonGroup>,
-                clickEvent: () => this.handleClick(data.rows[key].Order )}
-                element = Object.assign(element, fun )
+        for (const key in data[0].rows) {
+            if (data[0].rows.hasOwnProperty(key)) {
+              let element = data[0].rows[key];
+              let fun = {Opciones: <ButtonGroup toggle>
+                  <ToggleButton type="checkbox"  variant="outline-secondary" value={data[0].rows[key].Order} id={data[0].rows[key].Order} onClick={this.handleClick}></ToggleButton>
+                  <Button variant="secondary" className="ml-1 circle">imp</Button>
+                  <Button variant="danger" className="ml-1">del</Button>
+              </ButtonGroup>}
+              element = Object.assign(element, fun)
             }
         }
-        console.log(data);
-                  
+        
         this.setState({
-            dataTable: data,
+            dataTable: data[0],
             isData: true,
-        }) 
+        })
+        
     })
   }
 
   
   render() {
-    const {store, globalEventDistributor, isData, dataTable, dataDetails } = this.state
+    
+    const {store, globalEventDistributor, isData, dataTable, detailsTable, selected, dataDetails } = this.state
     return (
         <div className="container-fluid">
             {store && globalEventDistributor ?
@@ -68,8 +93,9 @@ class App extends Component {
                         { isData ? <TableApointments dataTable={dataTable}/> : <h1>No hay ordenes para poder agendar cita</h1> }
                       </div>
                       <div className="col-5" id="detail">
-                            <DetailsApointments dataDetails={dataDetails}/>                                                            
-                        </div>
+                            <DetailsApointments selected={selected} detailsTable={detailsTable} dataDetails={dataDetails}/>                                                            
+                      </div>
+                      
                     </div>
                 </Provider> :
                 <div>EL store no ha sido iniciado </div>}

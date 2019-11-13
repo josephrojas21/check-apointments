@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { Component } from 'react'
 import {ButtonToolbar, Button, Table,Form, FormControl, InputGroup} from 'react-bootstrap'
-import Img from 'react-image'
+
 
 import  QRCode from 'qrcode.react';
 
-const DetailData = ({dataDetails}) => {
-    
+const DetailData = ({detailsTable, dataDetails}) => {
+    let countInicial = 0 , countEntregar = 0;
+
+
     return (
+        
+        
         <div>
             <ButtonToolbar>
                 <Button variant="danger">Editar</Button>
@@ -21,23 +25,23 @@ const DetailData = ({dataDetails}) => {
                     <h5>REMISION DE ENTREGA</h5>
                 </div> 
                 <div className="col-2   ">
-                    <QRCode value="492" renderAs="svg" size={60}/>
+                    <QRCode value={dataDetails.ord_proceso} renderAs="svg" size={60}/>
                 </div>
                 <div className="row" id="infoClient">
                     <div className="col-6" >
                         <ul>
-                            <li>Nit: 874546654</li>
-                            <li>CONFECCIONARTE S.A.S</li>
-                            <li>Cr 50 # 45 fur 102</li>
-                            <li>confeccionarte@hotmai.com</li>
+                            <li>Nit: {dataDetails.nit} </li>
+                            <li>{dataDetails.nombre}</li>
+                            <li>{dataDetails.dir}</li>
+                            <li>{dataDetails.mail}</li>
                         </ul>
                     </div>
                     <div className="col-6" >
                         <ul>
-                            <li>Documnto compra: 874546654</li>
-                            <li>Codigo material: 2452163</li>
-                            <li>Ordern fabricacion: 641163</li>
-                            <li>Material: TRIO DE CAMISET</li>
+                            <li>Documento compra: {dataDetails.doc_compra}</li>
+                            <li>Codigo material: {dataDetails.cod_material}</li>
+                            <li>Ordern fabricacion: {dataDetails.orden}</li>
+                            <li>Material: {dataDetails.material}</li>
                         </ul>
                     </div>
                 </div>
@@ -54,26 +58,24 @@ const DetailData = ({dataDetails}) => {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                </tr>
+                                {detailsTable.map((data, index) =>{
+                                    
+                                    countInicial = countInicial + parseInt(data.cantidad_inicial)
+                                    countEntregar = countEntregar +  parseInt(data.cantidad_confirmada)
+                                    return <tr key={index}>
+                                        <td>{parseInt(data.valor_matriz) }</td>
+                                        <td>{data.plu}</td>
+                                        <td>{parseInt(data.cantidad_pendiente)}</td>
+                                        <td>{parseInt(data.cantidad_inicial)}</td>
+                                        <td>{parseInt(data.cantidad_confirmada)}</td>
+                                    </tr>
+                                })}
                                 <tr>
                                     <td></td>
                                     <td></td>
                                     <td>Total:</td>
-                                    <td>343</td>
-                                    <td>567</td>
+                                    <td>{countInicial}</td>
+                                    <td>{countEntregar}</td>
                                 </tr>
                             </tbody>
                         </Table>
@@ -94,15 +96,15 @@ const DetailData = ({dataDetails}) => {
                         <ul className="list-group list-group-horizontal">
                             <li className="list-group-item d-flex justify-content-between align-items-center">
                                 Tulas
-                                <span className="badge badge-primary badge-pill ml-2">14</span>
+                                <span className="badge badge-primary badge-pill ml-2">{dataDetails.tulas}</span>
                             </li>
                             <li className="list-group-item d-flex justify-content-between align-items-center ml-5">
                                 Cajas
-                                <span className="badge badge-primary badge-pill ml-2">2</span>
+                                <span className="badge badge-primary badge-pill ml-2">{dataDetails.cajas}</span>
                             </li>
                             <li className="list-group-item d-flex justify-content-between align-items-center ml-5">
                                 Bolsas
-                                <span className="badge badge-primary badge-pill ml-2">1</span>
+                                <span className="badge badge-primary badge-pill ml-2">{dataDetails.bolsas}</span>
                             </li>
                         </ul>    
                     </div>
