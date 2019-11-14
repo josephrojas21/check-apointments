@@ -1,40 +1,29 @@
 import React, { Component } from 'react'
-import {ButtonToolbar, Button, Table,Form, FormControl, InputGroup} from 'react-bootstrap'
-import PrintProvider, { Print, NoPrint } from 'react-easy-print';
-import './DetailStyle.css';
-
-
+import {Modal, Container, Row, Col,Button,ButtonToolbar,Table,Form, } from 'react-bootstrap'
 
 import  QRCode from 'qrcode.react';
 
-class DetailData extends Component{
+export default class ModalPrint extends Component {
     constructor(props) {
         super(props);
-        this.state ={
-
-        }
         
     }
-
     
-
     render() {
-        const {data_details,details_table, printable} = this.props
+        const {data_details,details_table,printable} = this.props
         let countInicial = 0 ;
         let countEntregar = 0;
         return (
-            <PrintProvider>
-            <div>
-                <NoPrint>
-                    <ButtonToolbar>
-                        <Button variant="danger">Editar</Button>
-                        <Button variant="secondry">Cancelar</Button>
-                        <Button variant="primary">Guardar</Button>
-                    </ButtonToolbar>
-                </NoPrint>
-                
-                <Print  name="foo">
-                    <div className="row apoinment" id={printable} >
+            <Modal size="lg" {...this.props} aria-labelledby="contained-modal-title-vcenter">
+                <Modal.Header closeButton>
+                    <Modal.Title id="contained-modal-title-vcenter">
+                    Using Grid in Modal
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Container>
+                  
+                    <div className="row apoinment"  >
                         <div className="col-3 col-sm-3  ">
                             <img src="http://localhost:9002/src/assets/img/Logo2.png"/>
                         </div> 
@@ -126,15 +115,13 @@ class DetailData extends Component{
                             </div>
                         </div>
                     </div>
-                </Print>
-            
-            </div>
-
-        </PrintProvider>
+                    </Container>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={this.props.onHide}>Cerrar</Button>
+                    <Button onClick={() => window.print()}>Imprimir</Button>
+                </Modal.Footer>
+            </Modal>
         )
     }
-
 }
-
-
-export default DetailData

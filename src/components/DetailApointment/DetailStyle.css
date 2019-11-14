@@ -31,3 +31,22 @@
 .counters{
     margin-left: 8%;
 }
+
+@media print {
+    body * {
+      visibility: hidden;
+      position: relative;
+
+    }
+    #section-to-print, #section-to-print * {
+      visibility: visible;
+      font-size: 1.5rem;
+    }
+    #section-to-print {
+      position: absolute;
+      width: 800px;
+      height: 700px;
+      right: 100px;
+    }
+  }
+

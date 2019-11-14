@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import DetailData from './DetailData'
-import './DetailStyle.css'
+import './DetailStyle.css';
+import ReactToPrint from "react-to-print";
+import PrintProvider, { Print, NoPrint } from 'react-easy-print';
 
 export default class DetailsApointments extends Component {
     constructor(props) {
@@ -12,21 +14,27 @@ export default class DetailsApointments extends Component {
 
 
     render() {
-        const {detailsTable, selected, dataDetails} = this.props
+        const {details_table, selected, data_details,printable} = this.props
         
         return (
             <Fragment>
-                <div className="row" id="detailsTitle">
-                    <div className="col-12">
-                        <h4>Detalle citas PCFK1</h4>
+                <PrintProvider>
+                    <NoPrint>
+                    <div className="row" id="detailsTitle">
+                        <div className="col-12">
+                            <h4>Detalle citas {data_details.categoria}</h4>
+                            
+                        </div>
                     </div>
-                </div>
-                <div className="row" id="detailsBody">
-                    <div className="col-12">
-                        {selected ? <DetailData detailsTable={detailsTable} dataDetails={dataDetails} /> : <h1>seleccione una cita</h1>}
-                        
+                    </NoPrint>
+                    <div className="row" id="detailsBody">
+                        <div className="col-12" id="printJS-form" >
+                            
+                            {selected ?  <DetailData  printable={printable}  details_table={details_table} data_details={data_details} /> : <h1>seleccione una cita</h1>}
+                            
+                        </div>
                     </div>
-                </div>
+                </PrintProvider>
             </Fragment>
             
         )
