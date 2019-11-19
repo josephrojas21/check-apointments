@@ -45,7 +45,7 @@
     #section-to-print {
       position: absolute;
       width: 800px;
-      height: 700px;
+      height: 100vh;
       right: 100px;
     }
   }

@@ -7,9 +7,9 @@ import TableApointments from './components/tableApointments/index'
 import SearchApointments from './components/searchApointments/index'
 import DataApointements from './services/data'
 import DetailsApointments from './components/DetailApointment/index'
-import {ButtonGroup, Button, ToggleButton} from 'react-bootstrap'
+import {ButtonGroup, Button, Form, ToggleButton} from 'react-bootstrap'
 import PrintProvider, { Print, NoPrint } from 'react-easy-print';
-import ReactToPrint from "react-to-print";
+import { FaTrashAlt, FaPrint } from "react-icons/fa";
 
 
 
@@ -27,7 +27,9 @@ class App extends Component {
         del: "disabled",
         data_details: {},
         details_table: [],
-        modalShow: false
+        modalShow: false,
+        editable:false
+
     }
 
     this.handleClick = this.handleClick.bind(this);
@@ -40,22 +42,18 @@ class App extends Component {
   } 
 
 
-  handleClick = e =>{
-    e.persist();
-    const { value, id } = e.target;
-   
-    if(value){
-
-    }else{
-      DataApointements.getDetails(id).then(res =>{
-        this.setState({
-          selected: true,
-          details_table: res.table,
-          data_details: res,
-          print: true
-        })
+  handleClick = (id) =>{
+    console.log(id);
+    
+    DataApointements.getDetails(id).then(res =>{
+      this.setState({
+        selected: true,
+        details_table: res.table,
+        data_details: res,
+        print: true
       })
-    }
+    })
+
     
   }
 
@@ -71,23 +69,24 @@ class App extends Component {
 
   }
 
-  // handlePrint = e =>{
-   
-    
-  // }
-
-  
-
   componentDidMount() {
     DataApointements.getData().then(data =>{
         for (const key in data[0].rows) {
             if (data[0].rows.hasOwnProperty(key)) {
               let element = data[0].rows[key];
               let fun = {Opciones: <ButtonGroup toggle>
-                  <ToggleButton type="checkbox"  variant="outline-secondary" value={data[0].rows[key].Order} id={data[0].rows[key].Order} onClick={this.handleClick}></ToggleButton>
-                  <Button  href="#" variant="secondary" className="ml-1 circle" value={data[0].rows[key].Order} id={data[0].rows[key].Order}  onClick={() => this.printOrder(data[0].rows[key].Order)} >imp</Button>
+                  <Form.Check 
+                                custom
+                                name="SelectItem"
+                                type="radio"
+                                id={String(data[0].rows[key].Order)}
+                                label
+                                onClick={() => this.handleClick(String(data[0].rows[key].Order))}
+                            />
+                  {/* <ToggleButton type="checkbox"  variant="outline-secondary" value={data[0].rows[key].Order} id={data[0].rows[key].Order} onClick={() => this.printOrder(data[0].rows[key].Order)}></ToggleButton> */}
+                  <Button   variant="secondary" className="ml-1 " value={data[0].rows[key].Order} id={data[0].rows[key].Order}  onClick={() => this.printOrder(data[0].rows[key].Order)} ><FaPrint/></Button>
                        
-                  <Button variant="danger" className="ml-1" >del</Button>
+                  <Button variant="danger" className="ml-1" disabled = {true} ><FaTrashAlt/></Button>
               </ButtonGroup>}
               element = Object.assign(element, fun)
             }
@@ -104,7 +103,7 @@ class App extends Component {
   
   render() {
     
-    const {store,modalShow, globalEventDistributor, isData, data_table, details_table, selected, data_details } = this.state
+    const {store,modalShow, globalEventDistributor, isData, data_table, details_table, selected, data_details, editable } = this.state
     return (
       
         <div className="container-fluid">
@@ -119,7 +118,7 @@ class App extends Component {
                         </NoPrint>
                       </div>
                       <div className="col-5" id="detail">
-                            <DetailsApointments  selected={selected} printable='section-to-print'  details_table={details_table} data_details={data_details}/>                                                            
+                            <DetailsApointments editable={editable} selected={selected} printable='section-to-print'  details_table={details_table} data_details={data_details}/>                                                            
                       </div>
                       
                     </div>

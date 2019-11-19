@@ -14,7 +14,7 @@ export default class DetailsApointments extends Component {
 
 
     render() {
-        const {details_table, selected, data_details,printable} = this.props
+        const {details_table, selected, data_details,printable,editable} = this.props
         
         return (
             <Fragment>
@@ -30,7 +30,7 @@ export default class DetailsApointments extends Component {
                     <div className="row" id="detailsBody">
                         <div className="col-12" id="printJS-form" >
                             
-                            {selected ?  <DetailData  printable={printable}  details_table={details_table} data_details={data_details} /> : <h1>seleccione una cita</h1>}
+                            {selected ?  <DetailData editable={editable}  printable={printable}  details_table={details_table} data_details={data_details} /> : <h1>seleccione una cita</h1>}
                             
                         </div>
                     </div>

@@ -11,15 +11,22 @@ class DetailData extends Component{
     constructor(props) {
         super(props);
         this.state ={
-
+            editable: true
         }
         
+    }
+
+    handleOnclick(){
+        this.setState({
+            editable: false
+        })
     }
 
     
 
     render() {
-        const {data_details,details_table, printable} = this.props
+        const {data_details,details_table, printable} = this.props;
+        const {editable} = this.state;
         let countInicial = 0 ;
         let countEntregar = 0;
         return (
@@ -27,9 +34,9 @@ class DetailData extends Component{
             <div>
                 <NoPrint>
                     <ButtonToolbar>
-                        <Button variant="danger">Editar</Button>
-                        <Button variant="secondry">Cancelar</Button>
-                        <Button variant="primary">Guardar</Button>
+                        <Button variant="danger" className="md-5" onClick={() => this.handleOnclick()}>Editar</Button>
+                        <Button className="ml-5" variant="secondary">Cancelar</Button>
+                        <Button variant="primary" className="ml-1" >Guardar</Button>
                     </ButtonToolbar>
                 </NoPrint>
                 
@@ -83,7 +90,7 @@ class DetailData extends Component{
                                                 <td>{data.plu}</td>
                                                 <td>{parseInt(data.cantidad_pendiente)}</td>
                                                 <td >{parseInt(data.cantidad_inicial)}</td>
-                                                <td >{parseInt(data.cantidad_confirmada)}</td>
+                                                <td ><input type="number"  className="widthTexbox form-control " disabled={editable} defaultValue={parseInt(data.cantidad_confirmada)} size="14" /> </td>
                                             </tr>
                                         })}
                                         <tr>

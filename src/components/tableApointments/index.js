@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { MDBDataTable } from 'mdbreact';
+import {Form, Row} from 'react-bootstrap'
 import  './tableStyle.css';
 
 class TableApointments extends Component{
@@ -11,6 +12,8 @@ class TableApointments extends Component{
         return (
             <div className="row" id="table" >
             <div className="col-12">
+            <Form>
+                <Form.Group as={Row}>
                 <MDBDataTable
                     striped
                     bordered
@@ -22,6 +25,9 @@ class TableApointments extends Component{
                     paginationLabel={["Anterior", "Siguiente"]}
                     entriesLabel="Mostrar registros"
                     searchLabel="Buscar"/>
+                </Form.Group>
+            </Form>
+                
             </div>
         </div>
         )
