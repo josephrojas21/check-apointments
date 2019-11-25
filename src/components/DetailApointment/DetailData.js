@@ -11,31 +11,28 @@ class DetailData extends Component{
     constructor(props) {
         super(props);
         this.state ={
-            editable: true
+            //editable: true,
+            details_table_temp: this.props.details_table,
+            newValues: []
         }
         
     }
 
-    handleOnclick(){
-        this.setState({
-            editable: false
-        })
-    }
+    
 
     
 
     render() {
-        const {data_details,details_table, printable} = this.props;
-        const {editable} = this.state;
+        const {data_details,details_table, printable,total,onClickEditable,editable,onClickCancel,OnChangeInputs} = this.props;
+        //const {editable} = this.state;
         let countInicial = 0 ;
-        let countEntregar = 0;
         return (
             <PrintProvider>
             <div>
                 <NoPrint>
                     <ButtonToolbar>
-                        <Button variant="danger" className="md-5" onClick={() => this.handleOnclick()}>Editar</Button>
-                        <Button className="ml-5" variant="secondary">Cancelar</Button>
+                        <Button variant="danger" className="md-5" disabled={!editable} onClick={onClickEditable}>Editar</Button>
+                        <Button className="ml-5" variant="secondary" disabled={editable} onClick={onClickCancel}>Cancelar</Button>
                         <Button variant="primary" className="ml-1" >Guardar</Button>
                     </ButtonToolbar>
                 </NoPrint>
@@ -82,23 +79,24 @@ class DetailData extends Component{
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {details_table.map((data, index) =>{
+                                        {data_details.table.map((data, index) =>{        
                                             countInicial = countInicial + parseInt(data.cantidad_inicial)
-                                            countEntregar = countEntregar +  parseInt(data.cantidad_confirmada)
+                                            
                                             return <tr key={index}>
-                                                <td>{parseInt(data.valor_matriz) }</td>
+                                                <td>{data.valor_matriz }</td>
                                                 <td>{data.plu}</td>
                                                 <td>{parseInt(data.cantidad_pendiente)}</td>
                                                 <td >{parseInt(data.cantidad_inicial)}</td>
-                                                <td ><input type="number"  className="widthTexbox form-control " disabled={editable} defaultValue={parseInt(data.cantidad_confirmada)} size="14" /> </td>
+                                                <td >{editable ? parseInt(data.cantidad_confirmada) : <input type="number" name={index} id="input" className="widthTexbox form-control " disabled={editable} onChange={OnChangeInputs}  defaultValue={parseInt(data.cantidad_confirmada)} size="14"  />}</td>
                                             </tr>
+                                            
                                         })}
                                         <tr>
                                             <td></td>
                                             <td></td>
                                             <td>Total:</td>
                                             <td>{countInicial}</td>
-                                            <td>{countEntregar}</td>
+                                            <td >{total}</td>
                                         </tr>
                                     </tbody>
                                 </Table>

@@ -27,6 +27,7 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "^5.1.2",
     "react-to-print": "^2.5.0",
+    "react-toastify": "^5.4.1",
     "redux": "^4.0.0",
     "sass-loader": "^8.0.0",
     "scss-loader": "0.0.1",
