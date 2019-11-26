@@ -42,6 +42,7 @@ class App extends Component {
     this.handleCancel = this.handleCancel.bind(this);
     this.handleOnChangeInputs = this.handleOnChangeInputs.bind(this);
     this.handleDeleteApointment = this.handleDeleteApointment.bind(this);
+    this.handleOnChangeBox = this.handleOnChangeBox.bind(this);
   }
 
   componentDidCatch(error, info) {
@@ -52,7 +53,7 @@ class App extends Component {
     // only update chart if the data has changed
     console.log('se cambio algo');
     console.log('prev props',prevProps);
-    console.log('prev state',prevState.data_table, this.state.data_table);
+    console.log('prev state',prevState.data_details, this.state.data_details);
     if (
       this.state.editable !== prevState.editable
     ) {
@@ -74,10 +75,24 @@ class App extends Component {
         
       })
     })
-    
-    
-    
+  }
 
+  handleOnChangeBox = e =>{
+    let newData  = this.state.data_details;
+    let value = e.target.value;
+    let id = e.target.id;
+    console.log(id,value);
+    
+    if( id === "bolsas")
+      newData.bolsas = value;
+    if(id === "tulas")
+      newData.tulas = value;
+    if( id === "cajas")
+      newData.cajas =value;
+
+    this.setState({
+      data_details: newData
+    })
   }
 
   handleOnChangeInputs = e =>{
@@ -256,6 +271,7 @@ class App extends Component {
                               cantDelivery={cantDelivery} 
                               total={total}
                               OnChangeInputs={this.handleOnChangeInputs}
+                              OnChangeBox={this.handleOnChangeBox}
                               />                                                            
                       </div>
                       

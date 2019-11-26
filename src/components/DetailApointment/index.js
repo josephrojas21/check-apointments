@@ -13,7 +13,7 @@ export default class DetailsApointments extends Component {
 
     render() {
         const {details_table, selected, data_details,printable,editable,
-               total,onClickEditable,onClickCancel,OnChangeInputs} = this.props
+               total,onClickEditable,onClickCancel,OnChangeInputs,OnChangeBox} = this.props
         
         return (
             <Fragment>
@@ -37,7 +37,8 @@ export default class DetailsApointments extends Component {
                                             total={total}
                                             onClickEditable={onClickEditable}
                                             onClickCancel={onClickCancel}
-                                            OnChangeInputs={OnChangeInputs}/> : <h1>seleccione una cita</h1>}
+                                            OnChangeInputs={OnChangeInputs}
+                                            OnChangeBox={OnChangeBox}/> : <h1>seleccione una cita</h1>}
                             
                         </div>
                     </div>

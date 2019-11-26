@@ -23,7 +23,8 @@ class DetailData extends Component{
     
 
     render() {
-        const {data_details,details_table, printable,total,onClickEditable,editable,onClickCancel,OnChangeInputs} = this.props;
+        const {data_details,details_table, printable,total,onClickEditable,
+               editable,onClickCancel,OnChangeInputs,OnChangeBox} = this.props;
         //const {editable} = this.state;
         let countInicial = 0 ;
         return (
@@ -112,6 +113,7 @@ class DetailData extends Component{
                                 </Form>
                             </div>
                         </div>
+                        {editable ? 
                         <div className="row ">
                             <div className="col-12 col-sm-12 counters">
                                 <ul className="list-group list-group-horizontal">
@@ -130,6 +132,50 @@ class DetailData extends Component{
                                 </ul>    
                             </div>
                         </div>
+                        :
+                        <div className="row ">
+                            <div className="col-3 col-sm-3 counters">
+                                <InputGroup size="sm"  className="mb-1">
+                                    <InputGroup.Prepend>
+                                        <InputGroup.Text id="basic-addon1" >Tulas</InputGroup.Text>
+                                    </InputGroup.Prepend>
+                                    <FormControl
+                                        type="number"
+                                        defaultValue={data_details.tulas}
+                                        aria-describedby="basic-addon1"
+                                        onChange={OnChangeBox}
+                                        id="tulas"/>
+                                        
+                                </InputGroup> 
+                            </div> 
+                            <div className="col-3 col-sm-3 counters">
+                                <InputGroup size="sm"  className="mb-1">
+                                    <InputGroup.Prepend>
+                                        <InputGroup.Text id="basic-addon1" >Cajas</InputGroup.Text>
+                                    </InputGroup.Prepend>
+                                    <FormControl
+                                        type="number"
+                                        defaultValue={data_details.cajas}
+                                        aria-describedby="basic-addon1"
+                                        onChange={OnChangeBox}
+                                        id="cajas"/>
+                                </InputGroup>
+                            </div>
+                            <div className="col-3 col-sm-3 counters">
+                                <InputGroup size="sm"  className="mb-1">
+                                    <InputGroup.Prepend>
+                                        <InputGroup.Text id="basic-addon1" >Bolsas</InputGroup.Text>
+                                    </InputGroup.Prepend>
+                                    <FormControl
+                                        type="number"
+                                        defaultValue={data_details.bolsas}
+                                        aria-describedby="basic-addon1"
+                                        onChange={OnChangeBox}
+                                        id="bolsas"/>
+                                </InputGroup>  
+                            </div>    
+                        </div> }
+                        
                     </div>
                 </Print>
             
@@ -142,4 +188,24 @@ class DetailData extends Component{
 }
 
 
-export default DetailData
+export default DetailData;
+
+
+{/* <div className="row ">
+                            <div className="col-12 col-sm-12 counters">
+                                <ul className="list-group list-group-horizontal">
+                                    <li className="list-group-item d-flex justify-content-between align-items-center">
+                                        Tulas
+                                        <span className="badge badge-primary badge-pill ml-2">{data_details.tulas}</span>
+                                    </li>
+                                    <li className="list-group-item d-flex justify-content-between align-items-center ml-5">
+                                        Cajas
+                                        <span className="badge badge-primary badge-pill ml-2">{data_details.cajas}</span>
+                                    </li>
+                                    <li className="list-group-item d-flex justify-content-between align-items-center ml-5">
+                                        Bolsas
+                                        <span className="badge badge-primary badge-pill ml-2">{data_details.bolsas}</span>
+                                    </li>
+                                </ul>    
+                            </div>
+                        </div> */}
