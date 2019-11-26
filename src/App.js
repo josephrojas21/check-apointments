@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider, connect } from 'react-redux';
-import ModalPrint from './components/Modal/index'
+import ModalPrint from './components/Modals/modalPrint/index'
 import TableApointments from './components/tableApointments/index'
 import SearchApointments from './components/searchApointments/index'
 import DataApointements from './services/data'
@@ -138,39 +138,39 @@ class App extends Component {
   }
 
   handleCancel = () =>{
-    let data_editable = this.state.data_table;
-      data_editable.columns.push({
+    // let data_editable = this.state.data_table;
+    //   data_editable.columns.push({
 
-          label: 'Opciones',
-          field: 'Opciones',
-          sort: 'asc',
-          width: 100
-      })
-      let index = 0;
-      for (const key in data_editable.rows) {
-        if (data_editable.rows.hasOwnProperty(key)) {
-          let element = data_editable.rows[key];
-          let fun = {Opciones: <ButtonGroup toggle>
-            <Form.Check 
-                          custom
-                          name="SelectItem"
-                          type="radio"
-                          id={String(data_editable.rows[key].Order)}
-                          label
-                          onClick={() => this.handleClick(String(data_editable.rows[key].Order))}
-                      />
-            {/* <ToggleButton type="checkbox"  variant="outline-secondary" value={data[0].rows[key].Order} id={data[0].rows[key].Order} onClick={() => this.printOrder(data[0].rows[key].Order)}></ToggleButton> */}
-            {<Button   variant="secondary" className="ml-1 " value={data_editable.rows[key].Order} id={data_editable.rows[key].Order}  onClick={() => this.printOrder(data_editable.rows[key].Order)} ><FaPrint/></Button>}
+    //       label: 'Opciones',
+    //       field: 'Opciones',
+    //       sort: 'asc',
+    //       width: 100
+    //   })
+    //   let index = 0;
+    //   for (const key in data_editable.rows) {
+    //     if (data_editable.rows.hasOwnProperty(key)) {
+    //       let element = data_editable.rows[key];
+    //       let fun = {Opciones: <ButtonGroup toggle>
+    //         <Form.Check 
+    //                       custom
+    //                       name="SelectItem"
+    //                       type="radio"
+    //                       id={String(data_editable.rows[key].Order)}
+    //                       label
+    //                       onClick={() => this.handleClick(String(data_editable.rows[key].Order))}
+    //                   />
+    //         {/* <ToggleButton type="checkbox"  variant="outline-secondary" value={data[0].rows[key].Order} id={data[0].rows[key].Order} onClick={() => this.printOrder(data[0].rows[key].Order)}></ToggleButton> */}
+    //         {<Button   variant="secondary" className="ml-1 " value={data_editable.rows[key].Order} id={data_editable.rows[key].Order}  onClick={() => this.printOrder(data_editable.rows[key].Order)} ><FaPrint/></Button>}
                 
-            { <Button variant="danger" className="ml-1" disabled = {this.state.editable } ><FaTrashAlt/></Button> }
-        </ButtonGroup>,
-        Order:index }
-          element = Object.assign(element, fun)
-        }
-        index++;
-      }
-      this.setState({data_table: data_editable, editable: true })
-
+    //         { <Button variant="danger" className="ml-1" disabled = {this.state.editable } ><FaTrashAlt/></Button> }
+    //     </ButtonGroup>,
+    //     Order:index }
+    //       element = Object.assign(element, fun)
+    //     }
+    //     index++;
+    //   }
+    //   this.setState({data_table: data_editable, editable: true })
+    window.location.reload(false);
   }
 
   handleClick = (id) =>{
