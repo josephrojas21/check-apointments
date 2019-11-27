@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {ButtonToolbar, Button, Table,Form, FormControl, InputGroup} from 'react-bootstrap'
 import PrintProvider, { Print, NoPrint } from 'react-easy-print';
 import ModalAlert from '../Modals/modalAlert/index'
+import ModalSave from '../Modals/modalSave/index'
 import './DetailStyle.css';
 
 
@@ -19,13 +20,9 @@ class DetailData extends Component{
         
     }
 
-    
-
-    
-
     render() {
         const {data_details,details_table, printable,total,onClickEditable,
-               editable,onClickCancel,OnChangeInputs,OnChangeBox} = this.props;
+               editable,OnChangeInputs,OnChangeBox} = this.props;
         //const {editable} = this.state;
         let countInicial = 0 ;
         return (
@@ -34,9 +31,8 @@ class DetailData extends Component{
                 <NoPrint>
                     <ButtonToolbar>
                         <Button variant="danger" className="md-5" disabled={!editable} onClick={onClickEditable}>Editar</Button>
-                        <ModalAlert editable={editable} onClickCancel={onClickCancel}/>
-                        {/* <Button className="ml-5" variant="secondary" disabled={editable} onClick={onClickCancel}>Cancelar</Button> */}
-                        <Button variant="primary" className="ml-1" >Guardar</Button>
+                        <ModalAlert editable={editable} />
+                        <ModalSave editable={editable} data_details={data_details}/>
                     </ButtonToolbar>
                 </NoPrint>
                 

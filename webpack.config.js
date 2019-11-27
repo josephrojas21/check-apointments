@@ -1,4 +1,7 @@
 const path = require('path');
+const Dotenv = require('dotenv-webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 
 module.exports = {
     entry: {
@@ -43,7 +46,13 @@ module.exports = {
     },
 
     mode: 'development',
-
+    plugins: [
+        new Dotenv(),
+		new CopyWebpackPlugin([
+			{ from: path.resolve(__dirname, 'public/index.html') },
+			{ from: path.resolve(__dirname, 'public/assets/img/Logo2.jpg') },
+		])
+    ],
     devtool: 'eval-source-map',
     // devtool: 'none',
 

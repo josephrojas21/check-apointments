@@ -1,0 +1,11 @@
+#card-modal,#card-button{
+    background-color: #0069b4;
+    border-color: #0069b4;
+}
+
+#cbox{
+    border: 1px solid black;
+    color: #0069b4;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: gray;
+}

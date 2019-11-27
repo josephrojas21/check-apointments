@@ -36,7 +36,6 @@ export default class DetailsApointments extends Component {
                                             data_details={data_details} 
                                             total={total}
                                             onClickEditable={onClickEditable}
-                                            onClickCancel={onClickCancel}
                                             OnChangeInputs={OnChangeInputs}
                                             OnChangeBox={OnChangeBox}/> : <h1>seleccione una cita</h1>}
                             

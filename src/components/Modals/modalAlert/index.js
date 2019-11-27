@@ -17,7 +17,7 @@ function ModalAlert(props) {
   
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title> <img src="http://localhost:9002/src/assets/img/Logo2.png" style={{width:"50%"}}/></Modal.Title>
           </Modal.Header>
           <Modal.Body>¿Desea descartar los cambios realizados?</Modal.Body>
           <Modal.Footer>

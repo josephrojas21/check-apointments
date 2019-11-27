@@ -39,7 +39,6 @@ class App extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.printOrder = this.printOrder.bind(this);
     this.handleEditable = this.handleEditable.bind(this)
-    this.handleCancel = this.handleCancel.bind(this);
     this.handleOnChangeInputs = this.handleOnChangeInputs.bind(this);
     this.handleDeleteApointment = this.handleDeleteApointment.bind(this);
     this.handleOnChangeBox = this.handleOnChangeBox.bind(this);
@@ -137,41 +136,6 @@ class App extends Component {
       this.setState({data_table: data_editable, editable: false })
   }
 
-  handleCancel = () =>{
-    // let data_editable = this.state.data_table;
-    //   data_editable.columns.push({
-
-    //       label: 'Opciones',
-    //       field: 'Opciones',
-    //       sort: 'asc',
-    //       width: 100
-    //   })
-    //   let index = 0;
-    //   for (const key in data_editable.rows) {
-    //     if (data_editable.rows.hasOwnProperty(key)) {
-    //       let element = data_editable.rows[key];
-    //       let fun = {Opciones: <ButtonGroup toggle>
-    //         <Form.Check 
-    //                       custom
-    //                       name="SelectItem"
-    //                       type="radio"
-    //                       id={String(data_editable.rows[key].Order)}
-    //                       label
-    //                       onClick={() => this.handleClick(String(data_editable.rows[key].Order))}
-    //                   />
-    //         {/* <ToggleButton type="checkbox"  variant="outline-secondary" value={data[0].rows[key].Order} id={data[0].rows[key].Order} onClick={() => this.printOrder(data[0].rows[key].Order)}></ToggleButton> */}
-    //         {<Button   variant="secondary" className="ml-1 " value={data_editable.rows[key].Order} id={data_editable.rows[key].Order}  onClick={() => this.printOrder(data_editable.rows[key].Order)} ><FaPrint/></Button>}
-                
-    //         { <Button variant="danger" className="ml-1" disabled = {this.state.editable } ><FaTrashAlt/></Button> }
-    //     </ButtonGroup>,
-    //     Order:index }
-    //       element = Object.assign(element, fun)
-    //     }
-    //     index++;
-    //   }
-    //   this.setState({data_table: data_editable, editable: true })
-    window.location.reload(false);
-  }
 
   handleClick = (id) =>{
     DataApointements.getDetails(id).then(res =>{
@@ -211,7 +175,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    DataApointements.getData('901057585').then(data =>{
+    DataApointements.getData('900469059').then(data =>{
+
         for (const key in data.data[0].rows) {
             if (data.data[0].rows.hasOwnProperty(key)) {
               let element = data.data[0].rows[key];
@@ -263,7 +228,6 @@ class App extends Component {
                             <DetailsApointments 
                               editable={editable} 
                               onClickEditable={this.handleEditable }
-                              onClickCancel={this.handleCancel}
                               selected={selected} 
                               printable='section-to-print'  
                               details_table={details_table} 
