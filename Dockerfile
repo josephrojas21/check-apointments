@@ -5,7 +5,7 @@ COPY package*.json ./
 RUN npm install
 COPY . .
 ARG env=qa
-COPY ./.env.$env ./.env.production
+COPY ./.env.$env ./.env
 RUN npm run build:portal
 
 # production stage
