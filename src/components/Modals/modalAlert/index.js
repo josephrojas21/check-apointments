@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import {Modal, Container, Row, Col,Button,ButtonToolbar,Table,Form, } from 'react-bootstrap'
+import {FaBan} from 'react-icons/fa';
+
+
 
 function ModalAlert(props) {
     const [show, setShow] = useState(false);
@@ -13,7 +16,7 @@ function ModalAlert(props) {
   
     return (
       <>
-        <Button className="ml-5" variant="secondary" onClick={handleShow} disabled={props.editable}>Cancelar</Button>
+        <Button variant="secondary" onClick={handleShow} disabled={props.editable}><FaBan className ="mb-1"/> Cancelar</Button>
   
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>

@@ -3,6 +3,7 @@ import { Modal, Container, Row, Col, Button, Card, Accordion, Form, } from 'reac
 import DataApointements from '../../../services/data'
 import jsonSave from '../../../services/models/saveApointment';
 import './modalSaveStyles.css';
+import {FaRegSave} from 'react-icons/fa';
 
 
 
@@ -23,7 +24,7 @@ function ModalSave(props) {
 
     return (
         <>
-            <Button variant="primary" className="ml-1" disabled={props.editable} onClick={handleShow} >Guardar</Button>
+            <Button variant="primary" className="ml-1" disabled={props.editable} onClick={handleShow} ><FaRegSave className="mb-1"/> Guardar</Button>
 
 
             <Modal onHide={handleShow} show={show} size="lg" aria-labelledby="contained-modal-title-vcenter">
