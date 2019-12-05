@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import {ButtonToolbar, Button, Table,Form, FormControl, InputGroup} from 'react-bootstrap'
+import {ButtonToolbar, Button, Table,Form, FormControl, InputGroup, Container, Row, Col,} from 'react-bootstrap'
 import PrintProvider, { Print, NoPrint } from 'react-easy-print';
 import ModalAlert from '../Modals/modalAlert/index'
 import ModalSave from '../Modals/modalSave/index'
 import './DetailStyle.css';
+import { FaRegEdit } from 'react-icons/fa';
 
 
 
@@ -28,15 +29,22 @@ class DetailData extends Component{
         return (
             <PrintProvider>
             <div>
+                <div id = "row-bordered-totals">
                 <NoPrint>
                     <ButtonToolbar>
-                        <Button variant="danger" className="md-5" disabled={!editable} onClick={onClickEditable}>Editar</Button>
+                        <Col>
+                        <Button variant="danger"  disabled={!editable} onClick={onClickEditable}><FaRegEdit className="iconstyle"/> Editar</Button>
+                        </Col>
+                        <Col>
                         <ModalAlert editable={editable} />
-                        <ModalSave editable={editable} data_details={data_details}/>
+                        </Col>
+                        <Col>
+                        <ModalSave  editable={editable} data_details={data_details}/>
+                        </Col>
                     </ButtonToolbar>
                 </NoPrint>
-                
-                <Print  name="foo">
+                </div>
+                <Print name="foo">
                     <div className="row apoinment" id={printable} >
                         <div className="col-3 col-sm-3  ">
                             <img src="http://localhost:9002/src/assets/img/Logo2.png"/>

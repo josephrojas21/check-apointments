@@ -25,6 +25,7 @@
     "react-easy-print": "^0.6.0",
     "react-icons": "^3.8.0",
     "react-image": "^2.2.1",
+    "react-loader": "^2.4.6",
     "react-redux": "^5.0.7",
     "react-router-dom": "^5.1.2",
     "react-to-print": "^2.5.0",

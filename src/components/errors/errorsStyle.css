@@ -1,0 +1,18 @@
+#errors{  
+    margin-top: 1%;
+    color: white;
+    position: center;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    margin-bottom: 1%;
+    border: 0.5px rgb(185, 185, 185) solid;
+    border-radius: 10px 10px 10px 10px;
+    background: #0069b4  !important;
+    text-align: center;
+    align-items: center;
+}
+
+#errors strong {
+    color: white;
+    font-weight: bold;
+}

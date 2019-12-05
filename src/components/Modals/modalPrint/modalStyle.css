@@ -1,0 +1,12 @@
+.container {
+    flex-grow: 1;
+    margin: 0 auto;
+    position: relative;
+    width: auto;
+}
+
+.apoinmentModal {
+    /* margin: 1%; */
+    padding: 2%;
+    /* background: white; */
+}
