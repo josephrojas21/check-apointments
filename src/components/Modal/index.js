@@ -17,7 +17,7 @@ export default class ModalPrint extends Component {
             <Modal size="lg" {...this.props} aria-labelledby="contained-modal-title-vcenter">
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                    Using Grid in Modal
+                    Using Grid in ModalA
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>

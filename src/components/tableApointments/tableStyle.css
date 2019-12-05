@@ -1,10 +1,30 @@
 #table{
 
     position: relative;
-    padding-top: 2.5%;
+    padding-top: 1%;
     padding-bottom: 5%;
     border: 0.5px rgb(185, 185, 185) solid;
     border-radius: 10px 10px 10px 10px;
-    background: rgb(233, 233, 233);
-    margin-top:2%;
+    background: white;
+    margin-top:1%;
+}
+
+.mdbDataTableStyle {
+    font-size: 74% ;
+    padding: 2%;
+}
+
+
+.pagination .page-item.active .page-link { background-color:rgb(10, 132, 247); }
+
+div.dataTables_wrapper div.dataTables_paginate ul.pagination  {
+    padding: 0% !important;
+    }
+
+div.dataTables_wrapper div.dataTables_paginate ul.pagination .page-item.active .page-link:focus {
+background-color:rgb(10, 132, 247);
+}
+
+.pagination .page-item.active .page-link:hover {
+background-color: rgb(10, 132, 247);
 }
