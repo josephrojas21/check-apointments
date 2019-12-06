@@ -63,19 +63,84 @@ class App extends Component {
   }
 
   handleDeleteApointment(id) {
-    DataApointements.getDetails(id).then(res => {
-      let details = res;
-      let body = jsonDelete;
-      body.PRODUCCION.CABECERA.nit = details.nit;
-      body.PRODUCCION.CABECERA.doc_compra = details.doc_compra;
-      body.PRODUCCION.CABECERA.consecutivo_ord_procesa = details.ord_proceso;
+    const Swal = require('sweetalert2');
+    let alert =
+      Swal.fire({
+        title: '¿Está seguro de eliminar esta cita?',
+        text: "Seleccione su respuesta",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#0069b4',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Aceptar'
+      }).then((result) => {
 
-      DataApointements.deleteApointment(body).then(res => {
-        console.log(res);
+        if (result.value) {
+          this.handleCharging();
+          DataApointements.getDetails(id).then(res => { 
+            let details = res;
 
+            if(!details.doc_compra){
+              this.showAlert(false, 'Cita sin documento de compra.');
+              return;
+            }
+
+            let body = jsonDelete;
+            body.PRODUCCION.CABECERA.nit = details.nit.toString();
+            body.PRODUCCION.CABECERA.doc_compra = details.doc_compra.toString();
+            body.PRODUCCION.CABECERA.consecutivo_ord_procesa = details.ord_proceso.toString();
+            body.PRODUCCION.CABECERA.material = details.cod_material.toString();
+
+            DataApointements.deleteApointment(body).then(res => {
+              let Answer = res.data.Resp_MT_PORTALPROVEEDOR_ELIMINARPRODUCCION27.RETORNO.retorno;
+              if (Answer.substring(Answer.length, 16) == "se eliminó correctamente") {
+                this.showAlert(true, Answer);
+              } else {
+                this.showAlert(false, Answer);
+              }
+            })
+          })
+        }
       })
-    })
   }
+
+  showAlert = (showSaveCorrect, msg) => {
+    const Swal = require('sweetalert2');
+    let alert;
+    if (showSaveCorrect) {
+      alert =
+        Swal.fire({
+          type: 'success',
+          title: 'Exito !',
+          text: msg
+        }).then((result) => {
+          location.reload();
+        })
+    } else {
+      alert =
+        Swal.fire({
+          type: 'error',
+          title: 'Error',
+          text: msg,
+          footer: '<a>Si tienes dudas comunicate con el adminsitrador.</a>'
+        });
+    }
+    return (alert);
+  }
+
+  handleCharging() {
+    const Swal = require('sweetalert2');
+    let alert =
+      Swal.fire({
+        title: 'PROCESANDO',
+        imageUrl: 'https://acegif.com/wp-content/uploads/loading-97.gif',
+        imageWidth: 170,
+        imageHeight: 130,
+        showCancelButton: false,
+        showConfirmButton: false
+      })
+  }
+
 
   handleOnChangeBox = e => {
     let newData = this.state.data_details;
@@ -181,33 +246,33 @@ class App extends Component {
 
       // if (data) {
       //   if (data.data[0]) {
-          for (const key in data.data[0].rows) {
-            if (data.data[0].rows.hasOwnProperty(key)) {
-              let element = data.data[0].rows[key];
-              let fun = {
-                Opciones: <ButtonGroup toggle>
-                  <Form.Check
-                    custom
-                    name="SelectItem"
-                    type="radio"
-                    id={String(data.data[0].rows[key].Order)}
-                    label
-                    onClick={() => this.handleClick(String(data.data[0].rows[key].Order))}
-                  />
-                  {/* <ToggleButton type="checkbox"  variant="outline-secondary" value={data[0].rows[key].Order} id={data[0].rows[key].Order} onClick={() => this.printOrder(data[0].rows[key].Order)}></ToggleButton> */}
-                  {<Button variant="secondary" className="ml-1 " value={data.data[0].rows[key].Order} id={data.data[0].rows[key].Order} onClick={() => this.printOrder(data.data[0].rows[key].Order)} ><FaPrint /></Button>}
+      for (const key in data.data[0].rows) {
+        if (data.data[0].rows.hasOwnProperty(key)) {
+          let element = data.data[0].rows[key];
+          let fun = {
+            Opciones: <ButtonGroup toggle>
+              <Form.Check
+                custom
+                name="SelectItem"
+                type="radio"
+                id={String(data.data[0].rows[key].Order)}
+                label
+                onClick={() => this.handleClick(String(data.data[0].rows[key].Order))}
+              />
+              {/* <ToggleButton type="checkbox"  variant="outline-secondary" value={data[0].rows[key].Order} id={data[0].rows[key].Order} onClick={() => this.printOrder(data[0].rows[key].Order)}></ToggleButton> */}
+              {<Button variant="secondary" className="ml-1 " value={data.data[0].rows[key].Order} id={data.data[0].rows[key].Order} onClick={() => this.printOrder(data.data[0].rows[key].Order)} ><FaPrint /></Button>}
 
-                  {<Button variant="secondary" className="ml-1" id={data.data[0].rows[key].Order} onClick={() => this.handleDeleteApointment(data.data[0].rows[key].Order)} ><FaTrashAlt /></Button>}
-                </ButtonGroup>
-              }
-              element = Object.assign(element, fun)
-            }
+              {<Button variant="secondary" className="ml-1" id={data.data[0].rows[key].Order} onClick={() => this.handleDeleteApointment(data.data[0].rows[key].Order)} ><FaTrashAlt /></Button>}
+            </ButtonGroup>
           }
+          element = Object.assign(element, fun)
+        }
+      }
 
-          this.setState({
-            data_table: data.data[0],
-            isData: true,
-          })
+      this.setState({
+        data_table: data.data[0],
+        isData: true,
+      })
       //   } else {
       //     this.setState({
       //       MsgErrorData: 'No tiene citas pendientes.'
