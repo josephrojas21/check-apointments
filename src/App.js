@@ -10,7 +10,7 @@ import DetailsApointments from './components/DetailApointment/index'
 import { ButtonGroup, Button, Form, ToggleButton } from 'react-bootstrap'
 import PrintProvider, { Print, NoPrint } from 'react-easy-print';
 import { FaTrashAlt, FaPrint } from "react-icons/fa";
-import { jsonDelete } from './services/models/deleteApointment'
+import { jsonDelete } from './services/models/deleteApointment';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from 'react-loader';
