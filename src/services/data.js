@@ -34,6 +34,8 @@ class DataApointements{
 
     static async deleteApointment(data){
         try {     
+            console.log('Data a eliminar:', data);
+            console.log('Data a eliminar en json:', JSON.stringify(data));
             const response = await fetch(`${URL}apointments/deleteApointment`, {
                 method: 'POST', // or 'PUT'
                 body: JSON.stringify(data), // data can be `string` or {object}!
