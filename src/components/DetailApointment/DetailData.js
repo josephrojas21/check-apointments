@@ -35,13 +35,12 @@ class DetailData extends Component {
         if (!this.getPermmision(PERMISSIONS_TO_EDIT)) {
             document.getElementById('Editbutton').disabled = true;
         }
-        if (this.getPermmision(PERMISSIONS_TO_CANCEL)) {
-           
+        if (!this.getPermmision(PERMISSIONS_TO_CANCEL)) {           
             this.setState({
                 Disabled_Cancel: true
             })       
         }
-        if (this.getPermmision(PERMISSIONS_TO_SAVE)) {
+        if (!this.getPermmision(PERMISSIONS_TO_SAVE)) {
             this.setState({
                 Disabled_Save: true
             })
@@ -124,7 +123,7 @@ class DetailData extends Component {
                                                     <td>{data.plu}</td>
                                                     <td>{parseInt(data.cantidad_pendiente)}</td>
                                                     <td >{parseInt(data.cantidad_inicial)}</td>
-                                                    <td >{editable ? parseInt(data.cantidad_confirmada) : <input type="number" name={index} id="input" className="widthTexbox form-control " disabled={editable} onChange={OnChangeInputs} defaultValue={parseInt(data.cantidad_confirmada)} size="14" />}</td>
+                                                    <td >{editable ? parseInt(data.cantidad_confirmada) : <input type="number" name={index} id="input" className="widthTexbox form-control " disabled={editable} onChange={OnChangeInputs} defaultValue={parseInt(data.cantidad_confirmada)} size="14" min = {0} />}</td>
                                                 </tr>
 
                                             })}
@@ -180,7 +179,8 @@ class DetailData extends Component {
                                                 defaultValue={data_details.tulas}
                                                 aria-describedby="basic-addon1"
                                                 onChange={OnChangeBox}
-                                                id="tulas" />
+                                                id="tulas"
+                                                min = {0} />
 
                                         </InputGroup>
                                     </div>
@@ -194,7 +194,8 @@ class DetailData extends Component {
                                                 defaultValue={data_details.cajas}
                                                 aria-describedby="basic-addon1"
                                                 onChange={OnChangeBox}
-                                                id="cajas" />
+                                                id="cajas"
+                                                min = {0} />
                                         </InputGroup>
                                     </div>
                                     <div className="col-3 col-sm-3 counters">
@@ -207,7 +208,8 @@ class DetailData extends Component {
                                                 defaultValue={data_details.bolsas}
                                                 aria-describedby="basic-addon1"
                                                 onChange={OnChangeBox}
-                                                id="bolsas" />
+                                                id="bolsas" 
+                                                min = {0}/>
                                         </InputGroup>
                                     </div>
                                 </div>}
