@@ -16,6 +16,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import Loader from 'react-loader';
 import Errors from './components/errors/index';
 
+const PERMISSIONS_TO_DELETE = process.env.REACT_PERMISSIONS_TO_DELETE;
+const PERMISSIONS_TO_PRINT =  process.env.REACT_PERMISSIONS_TO_PRINT;
 
 class App extends Component {
   constructor(props) {
@@ -34,7 +36,6 @@ class App extends Component {
       total: 0,
       cantDelivery: [],
       MsgErrorData: ''
-
     }
 
     this.handleClick = this.handleClick.bind(this);
@@ -77,10 +78,10 @@ class App extends Component {
 
         if (result.value) {
           this.handleCharging();
-          DataApointements.getDetails(id).then(res => { 
+          DataApointements.getDetails(id).then(res => {
             let details = res;
 
-            if(!details.doc_compra){
+            if (!details.doc_compra) {
               this.showAlert(false, 'Cita sin documento de compra.');
               return;
             }
@@ -140,7 +141,6 @@ class App extends Component {
         showConfirmButton: false
       })
   }
-
 
   handleOnChangeBox = e => {
     let newData = this.state.data_details;
@@ -202,7 +202,6 @@ class App extends Component {
     this.setState({ data_table: data_editable, editable: false })
   }
 
-
   handleClick = (id) => {
     DataApointements.getDetails(id).then(res => {
       let cont = 0;
@@ -240,52 +239,71 @@ class App extends Component {
 
   }
 
+  getPermmision(item) {
+    let data = JSON.parse(localStorage.getItem("moduleApp"))
+    return data.acciones.filter(word => word.asegurableid == item).length > 0
+  }
+
+
   componentDidMount() {
-    DataApointements.getData('901057585').then(data => {
-      console.log('data: ', data);
+
+    const id = JSON.parse(localStorage.vuex).auth.applications[0].data.documentoIdentidad
+    console.log('auth: ', JSON.parse(localStorage.vuex).auth);
+
+    let Disabled_Print = true;
+    let Disabled_Delete = true;
+
+    if (this.getPermmision(PERMISSIONS_TO_PRINT)) {
+      Disabled_Print = false;
+    }
+
+    if (this.getPermmision(PERMISSIONS_TO_DELETE)) {
+      Disabled_Delete = false;
+    }
+
+    DataApointements.getData(String(id)).then(data => {
+      // console.log('data: ', data);
 
       // if (data) {
-      //   if (data.data[0]) {
-      for (const key in data.data[0].rows) {
-        if (data.data[0].rows.hasOwnProperty(key)) {
-          let element = data.data[0].rows[key];
-          let fun = {
-            Opciones: <ButtonGroup toggle>
-              <Form.Check
-                custom
-                name="SelectItem"
-                type="radio"
-                id={String(data.data[0].rows[key].Order)}
-                label
-                onClick={() => this.handleClick(String(data.data[0].rows[key].Order))}
-              />
-              {/* <ToggleButton type="checkbox"  variant="outline-secondary" value={data[0].rows[key].Order} id={data[0].rows[key].Order} onClick={() => this.printOrder(data[0].rows[key].Order)}></ToggleButton> */}
-              {<Button variant="secondary" className="ml-1 " value={data.data[0].rows[key].Order} id={data.data[0].rows[key].Order} onClick={() => this.printOrder(data.data[0].rows[key].Order)} ><FaPrint /></Button>}
+      if (data.data[0]) {
+        for (const key in data.data[0].rows) {
+          if (data.data[0].rows.hasOwnProperty(key)) {
+            let element = data.data[0].rows[key];
+            let fun = {
+              Opciones: <ButtonGroup toggle>
+                <Form.Check
+                  custom
+                  name="SelectItem"
+                  type="radio"
+                  id={String(data.data[0].rows[key].Order)}
+                  label
+                  onClick={() => this.handleClick(String(data.data[0].rows[key].Order))}
+                />
+                {/* <ToggleButton type="checkbox"  variant="outline-secondary" value={data[0].rows[key].Order} id={data[0].rows[key].Order} onClick={() => this.printOrder(data[0].rows[key].Order)}></ToggleButton> */}
+                {<Button variant="secondary" className="ml-1 " value={data.data[0].rows[key].Order} id={data.data[0].rows[key].Order} onClick={() => this.printOrder(data.data[0].rows[key].Order)} disabled={Disabled_Print} ><FaPrint /></Button>}
 
-              {<Button variant="secondary" className="ml-1" id={data.data[0].rows[key].Order} onClick={() => this.handleDeleteApointment(data.data[0].rows[key].Order)} ><FaTrashAlt /></Button>}
-            </ButtonGroup>
+                {<Button variant="secondary" className="ml-1" id={data.data[0].rows[key].Order} onClick={() => this.handleDeleteApointment(data.data[0].rows[key].Order)} disabled={Disabled_Delete}><FaTrashAlt /></Button>}
+              </ButtonGroup>
+            }
+            element = Object.assign(element, fun)
           }
-          element = Object.assign(element, fun)
         }
+
+        this.setState({
+          data_table: data.data[0],
+          isData: true,
+        })
+      }
+      else {
+        this.setState({
+          MsgErrorData: 'No tiene citas pendientes.'
+        })
       }
 
-      this.setState({
-        data_table: data.data[0],
-        isData: true,
-      })
-      //   } else {
-      //     this.setState({
-      //       MsgErrorData: 'No tiene citas pendientes.'
-      //     })
-      //   }
-
-      // } else {
-      //   this.setState({
-      //     MsgErrorData: 'Error en comunicación con el servidor, no se tiene respuesta.'
-      //   })
-      // }
+ 
     })
   }
+
 
   render() {
 

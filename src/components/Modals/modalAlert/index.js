@@ -16,7 +16,7 @@ function ModalAlert(props) {
   
     return (
       <>
-        <Button variant="secondary" onClick={handleShow} disabled={props.editable}><FaBan className ="mb-1"/> Cancelar</Button>
+        <Button id="CancelButton" variant="secondary" onClick={handleShow} disabled={props.editable}><FaBan className ="mb-1"/> Cancelar</Button>
   
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
