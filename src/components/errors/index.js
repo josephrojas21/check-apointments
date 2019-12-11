@@ -17,7 +17,7 @@ class errors extends Component {
 
         if (MsgErrorData.length > 1) {
 
-            ErrorGeneric = <div className="row" id="errors" >
+            ErrorGeneric = <div className="col-12 m-4" id="errors" >
                 <div className="col-12">
                     <h6><strong>{MsgErrorData}</strong></h6>
                 </div>
