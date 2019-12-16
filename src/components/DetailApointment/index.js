@@ -11,8 +11,8 @@ export default class DetailsApointments extends Component {
     }
 
     render() {
-        const { details_table, selected, data_details, printable, editable,
-            total, onClickEditable, onClickCancel, OnChangeInputs, OnChangeBox } = this.props
+        const {selected, data_details, printable, editable,
+            total, onClickEditable, OnChangeInputs, OnChangeBox, ChangeValueObservation} = this.props
 
         return (
             <Fragment>
@@ -31,13 +31,13 @@ export default class DetailsApointments extends Component {
 
                                 <DetailData
                                     editable={editable}
-                                    printable={printable}
-                                    details_table={details_table}
+                                    printable={printable}                               
                                     data_details={data_details}
                                     total={total}
                                     onClickEditable={onClickEditable}
                                     OnChangeInputs={OnChangeInputs}
-                                    OnChangeBox={OnChangeBox} />
+                                    OnChangeBox={OnChangeBox} 
+                                    ChangeValueObservation = {ChangeValueObservation}/>
                             </div>
                         </div>}
                         {!selected && <div className="mx-auto"><br /><br /><br /><br /><br /><br /><br /><br /><br /><h5>{<FaArrowLeft />} Seleccione una orden del panel de ordenes</h5></div>}

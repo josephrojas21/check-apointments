@@ -3,6 +3,8 @@ import {Modal, Container, Row, Col,Button,ButtonToolbar,Table,Form, } from 'reac
 
 import  QRCode from 'qrcode.react';
 
+const URL_IMAGE = process.env.REACT_APP_ROOT_IMAGES
+
 export default class ModalPrint extends Component {
     constructor(props) {
         super(props);
@@ -25,7 +27,7 @@ export default class ModalPrint extends Component {
                   
                     <div className="row apoinment"  >
                         <div className="col-3 col-sm-3  ">
-                            <img src="http://localhost:9002/src/assets/img/Logo2.png"/>
+                            <img src={URL_IMAGE + "Logo2.png"}/>
                         </div> 
                         <div className="col-6 col-sm-6  text-center">
                             <h5>REMISION DE ENTREGA</h5>

@@ -1,11 +1,94 @@
-#card-modal,#card-button{
+#card-modal, #card-button {
     background-color: #0069b4;
     border-color: #0069b4;
 }
 
-#cbox{
+#cbox {
     border: 1px solid black;
     color: #0069b4;
     border-radius: 5px 5px 5px 5px;
     box-shadow: gray;
 }
+
+#cardheader {
+    background-color: #0069b4;
+    border-color: #0069b4;
+    color: white;
+}
+
+.normalPaddings {
+    padding-left: 4%;
+    padding-top: 2%;
+    padding-right: 5%;
+}
+
+.downPaddings {
+    padding-left: 4%;
+    padding-top: 2%;
+    padding-right: 5%;
+    padding-bottom: 2%;
+}
+
+.center_td {
+    text-align: center !important;
+    align-items: center !important;
+    align-content: center ! important;
+}
+
+.table td, .table th {
+    border-top: 0px solid #dee2e6;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: .5rem;
+    margin-top: .5rem;
+}
+
+.colors {
+    color: white;
+    background-color: #0069b4;
+    border-color: #0069b4;
+}
+
+.right_td {
+    text-align: right !important;
+    align-items: right !important;
+    align-content: right ! important;
+}
+
+.TableStyle {
+    font-size: 74% ;
+    padding: 0% !important;
+}
+
+
+.parpadea {
+    animation-name: parpadeo;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  
+    -webkit-animation-name:parpadeo;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+  }
+  
+  @-moz-keyframes parpadeo{
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+  }
+  
+  @-webkit-keyframes parpadeo {
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+  }
+  
+  @keyframes parpadeo {
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+  }
