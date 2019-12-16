@@ -10,16 +10,14 @@ import QRCode from 'qrcode.react';
 const PERMISSIONS_TO_EDIT = process.env.REACT_PERMISSIONS_TO_EDIT;
 const PERMISSIONS_TO_CANCEL = process.env.REACT_PERMISSIONS_TO_CANCEL;
 const PERMISSIONS_TO_SAVE = process.env.REACT_PERMISSIONS_TO_SAVE;
+const URL_IMAGE = process.env.REACT_APP_ROOT_IMAGES
 
 class DetailData extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            //editable: true,
-            details_table_temp: this.props.details_table,
-            newValues: [],
-            Disabled_Cancel : false,
-            Disabled_Save : false
+            Disabled_Cancel: false,
+            Disabled_Save: false
         }
 
     }
@@ -35,10 +33,10 @@ class DetailData extends Component {
         if (!this.getPermmision(PERMISSIONS_TO_EDIT)) {
             document.getElementById('Editbutton').disabled = true;
         }
-        if (!this.getPermmision(PERMISSIONS_TO_CANCEL)) {           
+        if (!this.getPermmision(PERMISSIONS_TO_CANCEL)) {
             this.setState({
                 Disabled_Cancel: true
-            })       
+            })
         }
         if (!this.getPermmision(PERMISSIONS_TO_SAVE)) {
             this.setState({
@@ -47,9 +45,18 @@ class DetailData extends Component {
         }
     }
 
+    ChangeValueInputObservation = event => {
+        console.log('Enmtro a blur');
+        const { ChangeValueObservation } = this.props;
+        let value = '';
+        value = event.target.value.trim();
+        ChangeValueObservation(value);
+    }
+
+
     render() {
-        const { data_details, details_table, printable, total, onClickEditable,
-            editable, OnChangeInputs, OnChangeBox } = this.props;
+        const { data_details, printable, total, onClickEditable,
+            editable, OnChangeInputs, OnChangeBox, ChangeValueInputObservation } = this.props;
 
         const { Disabled_Cancel, Disabled_Save } = this.state;
         //const {editable} = this.state;
@@ -64,11 +71,11 @@ class DetailData extends Component {
                                     <Button id="Editbutton" variant="danger" disabled={!editable} onClick={onClickEditable}><FaRegEdit className="iconstyle" /> Editar</Button>
                                 </Col>
                                 <Col>
-                                { Disabled_Cancel == true ?  <ModalAlert editable={true}/>  : <ModalAlert editable={editable}/>}                                 
+                                    {Disabled_Cancel == true ? <ModalAlert editable={true} /> : <ModalAlert editable={editable} />}
                                 </Col>
                                 <Col>
-                                { Disabled_Save == true ?  <ModalSave editable={true} data_details={data_details} /> : <ModalSave editable={editable} data_details={data_details} />}                                 
-                                    
+                                    {Disabled_Save == true ? <ModalSave editable={true} data_details={data_details} /> : <ModalSave editable={editable} data_details={data_details} />}
+
                                 </Col>
                             </ButtonToolbar>
                         </NoPrint>
@@ -76,7 +83,7 @@ class DetailData extends Component {
                     <Print name="foo">
                         <div className="row apoinment" id={printable} >
                             <div className="col-3 col-sm-3  ">
-                                <img src="http://localhost:9002/src/assets/img/Logo2.png" />
+                                <img src={URL_IMAGE + "Logo2.png"} />
                             </div>
                             <div className="col-6 col-sm-6  text-center">
                                 <h5>REMISION DE ENTREGA</h5>
@@ -123,7 +130,7 @@ class DetailData extends Component {
                                                     <td>{data.plu}</td>
                                                     <td>{parseInt(data.cantidad_pendiente)}</td>
                                                     <td >{parseInt(data.cantidad_inicial)}</td>
-                                                    <td >{editable ? parseInt(data.cantidad_confirmada) : <input type="number" name={index} id="input" className="widthTexbox form-control " disabled={editable} onChange={OnChangeInputs} defaultValue={parseInt(data.cantidad_confirmada)} size="14" min = {0} />}</td>
+                                                    <td >{editable ? parseInt(data.cantidad_confirmada) : <input type="number" name={index} id="input" className="widthTexbox form-control " disabled={editable} onChange={OnChangeInputs} defaultValue={parseInt(data.cantidad_confirmada)} size="14" min={0} />}</td>
                                                 </tr>
 
                                             })}
@@ -138,14 +145,26 @@ class DetailData extends Component {
                                     </Table>
                                 </div>
                             </div>
-                            <div className="row">
+                            <div className="widthfull">
                                 <div className="col-12 col-sm-12">
-                                    <Form>
-                                        <Form.Group >
-                                            <Form.Label>Observciones</Form.Label>
-                                            <Form.Control size="lg" as="textarea" rows="3" cols="60" />
-                                        </Form.Group>
-                                    </Form>
+                                    <label htmlFor="exampleFormControlTextarea1">
+                                        Observaciones
+                                    </label>
+                                    {editable ? <textarea
+                                        className="form-control"
+                                        id={'Observations'}
+                                        rows="3"
+                                        disabled>
+                                        {data_details.observacion}
+                                    </textarea>
+                                        :
+                                        <textarea
+                                            className="form-control"
+                                            id={'Observations'}
+                                            rows="3"
+                                            onBlur={this.ChangeValueInputObservation}>
+                                            {data_details.observacion}
+                                        </textarea>}
                                 </div>
                             </div>
                             {editable ?
@@ -180,7 +199,7 @@ class DetailData extends Component {
                                                 aria-describedby="basic-addon1"
                                                 onChange={OnChangeBox}
                                                 id="tulas"
-                                                min = {0} />
+                                                min={0} />
 
                                         </InputGroup>
                                     </div>
@@ -195,7 +214,7 @@ class DetailData extends Component {
                                                 aria-describedby="basic-addon1"
                                                 onChange={OnChangeBox}
                                                 id="cajas"
-                                                min = {0} />
+                                                min={0} />
                                         </InputGroup>
                                     </div>
                                     <div className="col-3 col-sm-3 counters">
@@ -208,8 +227,8 @@ class DetailData extends Component {
                                                 defaultValue={data_details.bolsas}
                                                 aria-describedby="basic-addon1"
                                                 onChange={OnChangeBox}
-                                                id="bolsas" 
-                                                min = {0}/>
+                                                id="bolsas"
+                                                min={0} />
                                         </InputGroup>
                                     </div>
                                 </div>}

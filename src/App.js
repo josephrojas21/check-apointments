@@ -17,7 +17,8 @@ import Loader from 'react-loader';
 import Errors from './components/errors/index';
 
 const PERMISSIONS_TO_DELETE = process.env.REACT_PERMISSIONS_TO_DELETE;
-const PERMISSIONS_TO_PRINT =  process.env.REACT_PERMISSIONS_TO_PRINT;
+const PERMISSIONS_TO_PRINT = process.env.REACT_PERMISSIONS_TO_PRINT;
+const URL_IMAGE = process.env.REACT_APP_ROOT_IMAGES
 
 class App extends Component {
   constructor(props) {
@@ -44,6 +45,7 @@ class App extends Component {
     this.handleOnChangeInputs = this.handleOnChangeInputs.bind(this);
     this.handleDeleteApointment = this.handleDeleteApointment.bind(this);
     this.handleOnChangeBox = this.handleOnChangeBox.bind(this);
+    this.ChangeValueObservation = this.ChangeValueObservation.bind(this);
   }
 
   componentDidCatch(error, info) {
@@ -52,9 +54,9 @@ class App extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     // only update chart if the data has changed
-    console.log('se cambio algo');
-    console.log('prev props', prevProps);
-    console.log('prev state', prevState.data_details, this.state.data_details);
+    // console.log('se cambio algo');
+    // console.log('prev props', prevProps);
+    // console.log('prev state', prevState.data_details, this.state.data_details);
     if (
       this.state.editable !== prevState.editable
     ) {
@@ -146,7 +148,7 @@ class App extends Component {
     let newData = this.state.data_details;
     let value = e.target.value;
     let id = e.target.id;
-    console.log(id, value);
+    //  console.log(id, value);
 
     if (id === "bolsas")
       newData.bolsas = value;
@@ -166,14 +168,14 @@ class App extends Component {
     let index = e.target.name;
     let cont = 0;
     let cantMax = parseInt(newData.table[index].cantidad_maxima) + parseInt(newData.table[index].cantidad_entregar) + parseInt(newData.table[index].cantidad_pendiente)
-    console.log(cantMax);
+    //  console.log(cantMax);
 
     if (value === "") {
       value = 0;
       newData.table[index].cantidad_confirmada = value;
     } else if (value > cantMax) {
       toast.error('Supera la cantidad máxima permitida a entregar')
-      event.target.value = 0
+      event.target.value = cantMax
     } else {
       newData.table[index].cantidad_confirmada = value;
     }
@@ -185,6 +187,15 @@ class App extends Component {
     this.setState({
       data_details: newData,
       total: cont
+    })
+  }
+
+  ChangeValueObservation = (text) => {
+    let newData = this.state.data_details;   
+    newData.observacion = text;
+    console.log('newData: ', newData);
+    this.setState({
+      data_details: newData
     })
   }
 
@@ -205,11 +216,13 @@ class App extends Component {
   handleClick = (id) => {
     DataApointements.getDetails(id).then(res => {
       let cont = 0;
+      console.log('RESPUESTA DE HADLECLICK: ', res);
+
       res.table.map((data, index) => {
         cont = cont + parseInt(data.cantidad_confirmada);
 
       })
-      console.log(res);
+      // console.log(res);
       this.setState({
         selected: true,
         details_table: res.table,
@@ -248,7 +261,7 @@ class App extends Component {
   componentDidMount() {
 
     const id = JSON.parse(localStorage.vuex).auth.applications[0].data.documentoIdentidad
-    console.log('auth: ', JSON.parse(localStorage.vuex).auth);
+    // console.log('auth: ', JSON.parse(localStorage.vuex).auth);
 
     let Disabled_Print = true;
     let Disabled_Delete = true;
@@ -300,7 +313,7 @@ class App extends Component {
         })
       }
 
- 
+
     })
   }
 
@@ -319,23 +332,12 @@ class App extends Component {
 
                 {(!isData && !MsgErrorData.length > 0) && <div className="first">
                   <div className="second">
-                    <Loader
-                      loaded={this.state.loaded}
-                      lines={13}
-                      length={20}
-                      width={10}
-                      radius={30}
-                      corners={1}
-                      rotate={0}
-                      direction={1}
-                      color="#0069b4"
-                      speed={0.05}
-                      trail={60}
-                      className="spinner"
-                      top="50%"
-                      left="50%"
-                      scale={1.0}
-                    />
+
+                    <img src={URL_IMAGE + "load.gif"}
+                      alt="Procesando"
+                      width="200"
+                      height="141"></img>
+
                   </div>
                 </div>}
 
@@ -355,12 +357,12 @@ class App extends Component {
                       onClickEditable={this.handleEditable}
                       selected={selected}
                       printable='section-to-print'
-                      details_table={details_table}
                       data_details={data_details}
                       cantDelivery={cantDelivery}
                       total={total}
                       OnChangeInputs={this.handleOnChangeInputs}
                       OnChangeBox={this.handleOnChangeBox}
+                      ChangeValueObservation = {this.ChangeValueObservation}
                     />
                   </div>}
 

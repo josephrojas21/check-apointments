@@ -28,3 +28,7 @@ background-color:rgb(10, 132, 247);
 .pagination .page-item.active .page-link:hover {
 background-color: rgb(10, 132, 247);
 }
+
+tbody + thead{
+    display: none;
+  }
