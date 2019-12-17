@@ -277,6 +277,20 @@ class App extends Component {
     DataApointements.getData(String(id)).then(data => {
       // console.log('data: ', data);
 
+      if(!data){
+        this.setState({
+          MsgErrorData: 'No hay conexión con el servidor.'
+        })
+        return;
+      }
+
+      if(!data.data[0]){
+        this.setState({
+          MsgErrorData: 'No hay conexión con el servidor'
+        })
+        return;
+      }
+
       // if (data) {
       if (data.data[0]) {
         for (const key in data.data[0].rows) {
