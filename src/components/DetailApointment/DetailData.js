@@ -83,7 +83,7 @@ class DetailData extends Component {
                     <Print name="foo">
                         <div className="row apoinment" id={printable} >
                             <div className="col-3 col-sm-3  ">
-                                <img src={URL_IMAGE + "Logo2.png"} />
+                                <img src={URL_IMAGE+"Logo2.png"} />
                             </div>
                             <div className="col-6 col-sm-6  text-center">
                                 <h5>REMISION DE ENTREGA</h5>

@@ -12,6 +12,7 @@ RUN npm run build:portal
 
 FROM nginx:stable-alpine as production-stage
 COPY --from=build-stage /app/release /usr/share/nginx/html
+COPY --from=build-stage /app/src/assets/img /usr/share/nginx
 RUN rm /etc/nginx/conf.d/default.conf
 COPY nginx/nginx.conf /etc/nginx/conf.d
 EXPOSE 80

@@ -136,7 +136,7 @@ class App extends Component {
     let alert =
       Swal.fire({
         title: 'PROCESANDO',
-        imageUrl: 'https://acegif.com/wp-content/uploads/loading-97.gif',
+        imageUrl: URL_IMAGE + "load.gif",
         imageWidth: 170,
         imageHeight: 130,
         showCancelButton: false,
