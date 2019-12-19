@@ -3,7 +3,7 @@ FROM node:lts-alpine as build-stage
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
-COPY . .
+COPY . . 
 ARG env=qa
 COPY ./.env.$env ./.env
 RUN npm run build:portal
